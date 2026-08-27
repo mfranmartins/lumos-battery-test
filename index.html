@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teste de Bateria - Lumos</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .card {
+            max-width: 400px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .valor {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <h1>🔋 Teste Lumos</h1>
+
+        <p>Bateria:</p>
+        <div id="bateria" class="valor">--%</div>
+
+        <p>Status:</p>
+        <div id="status" class="valor">--</div>
+
+        <p>Tempo até 100%:</p>
+        <div id="tempo" class="valor">--</div>
+
+        <p id="erro"></p>
+
+    </div>
+
+    <script>
+
+        async function obterBateria() {
+
+            // Verifica se o navegador possui a API
+            if (!("getBattery" in navigator)) {
+
+                document.getElementById("erro").innerText =
+                    "❌ Este navegador não disponibiliza a Battery API.";
+
+                return;
+            }
+
+            try {
+
+                const battery = await navigator.getBattery();
+
+                function atualizar() {
+
+                    // Porcentagem
+                    const porcentagem =
+                        Math.round(battery.level * 100);
+
+                    document.getElementById("bateria").innerText =
+                        porcentagem + "%";
+
+
+                    // Status
+                    document.getElementById("status").innerText =
+                        battery.charging
+                            ? "⚡ Carregando"
+                            : "🔋 Desconectado";
+
+
+                    // Tempo restante
+                    if (battery.chargingTime !== Infinity) {
+
+                        const minutos =
+                            Math.round(battery.chargingTime / 60);
+
+                        document.getElementById("tempo").innerText =
+                            minutos + " minutos";
+
+                    } else {
+
+                        document.getElementById("tempo").innerText =
+                            "Indisponível";
+                    }
+                }
+
+                // Atualiza imediatamente
+                atualizar();
+
+                // Atualiza quando a bateria mudar
+                battery.addEventListener(
+                    "levelchange",
+                    atualizar
+                );
+
+                battery.addEventListener(
+                    "chargingchange",
+                    atualizar
+                );
+
+                battery.addEventListener(
+                    "chargingtimechange",
+                    atualizar
+                );
+
+            } catch (erro) {
+
+                console.error(erro);
+
+                document.getElementById("erro").innerText =
+                    "❌ Não foi possível acessar a bateria.";
+
+            }
+        }
+
+        obterBateria();
+
+    </script>
+
+</body>
+</html>
