@@ -1,177 +1,512 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>Lumos Battery Test</title>
+<title>Lumos Energy</title>
 
-    <style>
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f7f5;
+        margin: 0;
+        padding: 20px;
+        color: #1f2924;
+    }
+
+    .container {
+        max-width: 650px;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .subtitulo {
+        text-align: center;
+        color: #666;
+        margin-top: 0;
+        margin-bottom: 25px;
+    }
+
+    .card {
+        background: white;
+        padding: 22px;
+        border-radius: 20px;
+        margin-top: 18px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: 21px;
+    }
+
+    h3 {
+        margin-bottom: 8px;
+    }
+
+    /* ========================= */
+    /* BATERIA */
+    /* ========================= */
+
+    .bateria {
+        font-size: 52px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .status {
+        text-align: center;
+        font-size: 19px;
+        margin-top: 8px;
+    }
+
+    /* ========================= */
+    /* PREVISÃO */
+    /* ========================= */
+
+    .previsao {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .tempo {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .termino {
+        margin-top: 10px;
+        font-size: 17px;
+    }
+
+    .observacao {
+        margin-top: 15px;
+        font-size: 13px;
+        color: #666;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    /* ========================= */
+    /* SESSÃO */
+    /* ========================= */
+
+    .informacao {
+        display: flex;
+        justify-content: space-between;
+        padding: 9px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .informacao:last-child {
+        border-bottom: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        font-size: 17px;
+        cursor: pointer;
+        margin-top: 18px;
+        background: #1f8f55;
+        color: white;
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+
+    .botao-secundario {
+        background: #555;
+    }
+
+    /* ========================= */
+    /* HISTÓRICO */
+    /* ========================= */
+
+    #historico {
+        margin-top: 20px;
+    }
+
+    .registro {
+        padding: 9px 0;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+    }
+
+    .intervalo {
+        color: #777;
+        font-size: 12px;
+    }
+
+    /* ========================= */
+    /* ESTAÇÃO */
+    /* ========================= */
+
+    .estacao-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .estacao-item {
+        background: #f6f8f7;
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .estacao-valor {
+        font-size: 23px;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    .bandeira {
+        text-align: center;
+        padding: 15px;
+        border-radius: 12px;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    .verde {
+        background: #e5f6eb;
+    }
+
+    .amarela {
+        background: #fff5cc;
+    }
+
+    .vermelha {
+        background: #ffe1e1;
+    }
+
+    .noturno {
+        background: #e7e7f8;
+    }
+
+    .tarifa {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .tarifa-valor {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    /* ========================= */
+    /* SESSÃO REAL */
+    /* ========================= */
+
+    .destaque {
+        background: #f0f8f3;
+        border-radius: 14px;
+        padding: 16px;
+        margin-top: 15px;
+    }
+
+    .destaque-grande {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    /* ========================= */
+    /* VEÍCULOS */
+    /* ========================= */
+
+    .veiculo {
+        border: 1px solid #ddd;
+        border-radius: 14px;
+        padding: 15px;
+        margin-top: 12px;
+    }
+
+    .veiculo-titulo {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .veiculo-detalhe {
+        margin-top: 7px;
+        color: #555;
+        font-size: 14px;
+    }
+
+    .veiculo-custo {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .economia {
+        color: #1f8f55;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    /* ========================= */
+    /* AVISO */
+    /* ========================= */
+
+    .aviso {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.5;
+        margin-top: 15px;
+    }
+
+    .oculto {
+        display: none;
+    }
+
+    /* ========================= */
+    /* RESPONSIVO */
+    /* ========================= */
+
+    @media (max-width: 500px) {
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 30px;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: auto;
-        }
-
-        h1 {
-            text-align: center;
+            padding: 12px;
         }
 
         .card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+            padding: 18px;
         }
 
-        .bateria {
-            font-size: 50px;
-            font-weight: bold;
-            text-align: center;
+        .estacao-grid {
+            grid-template-columns: 1fr;
         }
 
-        .status {
-            text-align: center;
-            font-size: 20px;
-            margin: 10px;
-        }
+    }
 
-        .previsao {
-            text-align: center;
-            margin-top: 25px;
-        }
-
-        .tempo {
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .termino {
-            margin-top: 10px;
-            font-size: 18px;
-        }
-
-        .observacao {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #666;
-            text-align: center;
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        #historico {
-            margin-top: 20px;
-        }
-
-        .registro {
-            padding: 8px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-    </style>
+</style>
+```
 
 </head>
-
 
 <body>
 
 <div class="container">
 
-    <h1>🔋 Lumos Battery</h1>
+```
+<h1>⚡ Lumos</h1>
+
+<p class="subtitulo">
+    Intelligent Energy Management
+</p>
 
 
-    <!-- ============================= -->
-    <!-- STATUS DA BATERIA -->
-    <!-- ============================= -->
+<!-- ========================================= -->
+<!-- DISPOSITIVO -->
+<!-- ========================================= -->
 
-    <div class="card">
+<div class="card">
 
-        <div id="bateria" class="bateria">
-            --%
+    <h2>📱 Sessão de referência</h2>
+
+    <div id="bateria" class="bateria">
+        --%
+    </div>
+
+    <div id="status" class="status">
+        Verificando bateria...
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- PREVISÃO -->
+<!-- ========================================= -->
+
+<div class="card">
+
+    <h2>⏱️ Previsão Lumos</h2>
+
+    <div class="previsao">
+
+        <div
+            id="tempo"
+            class="tempo">
+
+            --
+
         </div>
 
-        <div id="status" class="status">
-            Verificando...
+        <div
+            id="termino"
+            class="termino">
+
+            --
+
         </div>
 
     </div>
 
+    <div class="observacao">
 
-    <!-- ============================= -->
-    <!-- PREVISÃO -->
-    <!-- ============================= -->
-
-    <div class="card">
-
-        <h2>⏱️ Previsão Lumos</h2>
-
-        <div class="previsao">
-
-            <div class="tempo" id="tempo">
-                --
-            </div>
-
-            <div class="termino" id="termino">
-                --
-            </div>
-
-        </div>
-
-
-        <div class="observacao">
-
-            A previsão utiliza a estimativa fornecida
-            pelo dispositivo com uma margem de segurança
-            de 20 minutos.
-
-        </div>
+        A previsão inicial é obtida diretamente
+        do dispositivo. A Lumos adiciona uma margem
+        de segurança de 20 minutos e evita alterações
+        constantes na previsão durante a sessão.
 
     </div>
 
+</div>
 
-    <!-- ============================= -->
-    <!-- SESSÃO -->
-    <!-- ============================= -->
 
-    <div class="card">
+<!-- ========================================= -->
+<!-- SESSÃO -->
+<!-- ========================================= -->
 
-        <h2>📊 Sessão de carregamento</h2>
+<div class="card">
+
+    <h2>📊 Sessão de carregamento</h2>
+
+    <div class="informacao">
+
+        <span>Início</span>
+
+        <strong id="inicio">
+            --
+        </strong>
+
+    </div>
+
+    <div class="informacao">
+
+        <span>Bateria inicial</span>
+
+        <strong id="bateriaInicial">
+            --
+        </strong>
+
+    </div>
+
+    <div class="informacao">
+
+        <span>Bateria atual</span>
+
+        <strong id="bateriaAtual">
+            --
+        </strong>
+
+    </div>
+
+    <div class="informacao">
+
+        <span>Variação</span>
+
+        <strong id="variacao">
+            --
+        </strong>
+
+    </div>
+
+    <button id="botao">
+        Iniciar sessão
+    </button>
+
+    <div id="historico">
 
         <p>
-            Início:
-            <span id="inicio">--</span>
+            Nenhum registro ainda.
         </p>
 
-        <button id="botao">
-            Iniciar sessão
-        </button>
+    </div>
 
-        <div id="historico">
+</div>
 
-            <p>
-                Nenhum registro ainda.
-            </p>
+
+<!-- ========================================= -->
+<!-- ESTAÇÃO LUMOS -->
+<!-- ========================================= -->
+
+<div class="card">
+
+    <h2>🏭 Estação Lumos</h2>
+
+    <div class="estacao-grid">
+
+        <div class="estacao-item">
+
+            ☀️ Geração solar
+
+            <div
+                id="solar"
+                class="estacao-valor">
+
+                --%
+
+            </div>
+
+        </div>
+
+
+        <div class="estacao-item">
+
+            🔋 Bateria Lynx
+
+            <div
+                id="lynx"
+                class="estacao-valor">
+
+                --%
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="bandeira"
+        class="bandeira">
+
+        Calculando bandeira...
+
+    </div>
+
+
+    <div class="tarifa">
+
+        <div>
+            Tarifa efetiva Lumos
+        </div>
+
+        <div
+            id="tarifaEfetiva"
+            class="tarifa-valor">
+
+            R$ --/kWh
+
+        </div>
+
+        <div
+            id="detalheTarifa"
+            class="observacao">
+
+            --
 
         </div>
 
@@ -180,12 +515,221 @@
 </div>
 
 
+<!-- ========================================= -->
+<!-- RESULTADO DA SESSÃO -->
+<!-- ========================================= -->
+
+<div
+    id="resultadoSessao"
+    class="card oculto">
+
+    <h2>⚡ Resultado da sessão</h2>
+
+    <div class="destaque">
+
+        <div>
+            Variação real do celular
+        </div>
+
+        <div
+            id="resultadoVariacao"
+            class="destaque-grande">
+
+            --
+
+        </div>
+
+    </div>
+
+
+    <div class="informacao">
+
+        <span>Duração</span>
+
+        <strong id="resultadoDuracao">
+            --
+        </strong>
+
+    </div>
+
+
+    <div class="informacao">
+
+        <span>Energia armazenada estimada</span>
+
+        <strong id="energiaCelular">
+            --
+        </strong>
+
+    </div>
+
+
+    <div class="aviso">
+
+        A energia do celular é utilizada apenas como
+        referência física para a sessão. A Lumos
+        converte a mesma porcentagem de carga para
+        diferentes capacidades de baterias de veículos
+        elétricos.
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- SIMULAÇÃO DE VEÍCULOS -->
+<!-- ========================================= -->
+
+<div
+    id="simulacaoEV"
+    class="card oculto">
+
+    <h2>🚗 E se fosse um carro elétrico?</h2>
+
+    <p>
+
+        A mesma variação percentual observada no celular
+        é aplicada às baterias virtuais dos veículos.
+
+    </p>
+
+
+    <div id="veiculos">
+
+        <!-- Preenchido pelo JavaScript -->
+
+    </div>
+
+
+    <div class="aviso">
+
+        Os valores representam uma simulação.
+        A capacidade da bateria do veículo, a eficiência
+        de carregamento e a tarifa são parâmetros da
+        plataforma Lumos.
+
+    </div>
+
+</div>
+```
+
+</div>
+
 <script>
 
 
-// ========================================
-// VARIÁVEIS
-// ========================================
+// =====================================================
+// CONFIGURAÇÕES PRINCIPAIS
+// =====================================================
+
+const CONFIG = {
+
+    // Capacidade energética estimada da bateria
+    // do Galaxy A06.
+    capacidadeCelularWh: 19.4,
+
+    // Margem de segurança da previsão.
+    margemPrevisaoMinutos: 20,
+
+    // Eficiência estimada do processo de carregamento
+    // do veículo elétrico.
+    eficienciaCarregamento: 0.85,
+
+    // Horário de início do desconto noturno.
+    inicioNoturno: 0,
+
+    // Horário de término do desconto noturno.
+    fimNoturno: 6
+
+};
+
+
+// =====================================================
+// TARIFAS DA LUMOS
+// =====================================================
+
+const TARIFAS = {
+
+    // Tarifa base definida para o protótipo.
+    base: 2.00,
+
+    // Adicionais definidos pela Lumos.
+    verde: 0.85,
+
+    amarela: 1.20,
+
+    vermelha: 1.60,
+
+    // Desconto da janela noturna.
+    descontoNoturno: 0.20
+
+};
+
+
+// =====================================================
+// DADOS SIMULADOS DA ESTAÇÃO
+// =====================================================
+//
+// Futuramente estes valores poderão vir do ESP32,
+// GoodWe ou de outra fonte de dados.
+//
+// Por enquanto são dados de demonstração.
+//
+
+const ESTACAO = {
+
+    geracaoSolar: 85,
+
+    bateriaLynx: 78
+
+};
+
+
+// =====================================================
+// VEÍCULOS VIRTUAIS
+// =====================================================
+
+const VEICULOS = [
+
+    {
+
+        nome: "Carro compacto / urbano",
+
+        icone: "🚙",
+
+        capacidade: 38
+
+    },
+
+    {
+
+        nome: "Carro médio / SUV",
+
+        icone: "🚘",
+
+        capacidade: 60
+
+    },
+
+    {
+
+        nome: "Carro grande / luxo",
+
+        icone: "🚙",
+
+        capacidade: 90
+
+    }
+
+];
+
+
+// =====================================================
+// VARIÁVEIS DA SESSÃO
+// =====================================================
+
+let batteryManager = null;
 
 let bateria = null;
 
@@ -195,28 +739,27 @@ let historico = [];
 
 let ultimoPercentualRegistrado = null;
 
+let inicioSessao = null;
+
+let bateriaInicialSessao = null;
+
+let previsaoInicialAPI = null;
+
+let previsaoCongelada = null;
+
 let intervalo = null;
 
-let batteryManager = null;
 
-
-// Margem adicionada pela Lumos
-
-const MARGEM_MINUTOS = 20;
-
-
-// ========================================
+// =====================================================
 // ACESSAR BATTERY API
-// ========================================
+// =====================================================
 
 async function obterBateria() {
-
-    // Verifica se o navegador suporta Battery API
 
     if (!("getBattery" in navigator)) {
 
         document.getElementById("status").innerText =
-            "❌ Battery API não disponível.";
+            "❌ Battery API não disponível neste navegador.";
 
         return;
 
@@ -229,12 +772,8 @@ async function obterBateria() {
             await navigator.getBattery();
 
 
-        // Primeira atualização
-
         atualizarDados();
 
-
-        // Quando o percentual mudar
 
         batteryManager.addEventListener(
             "levelchange",
@@ -242,19 +781,15 @@ async function obterBateria() {
         );
 
 
-        // Quando começar/parar de carregar
-
         batteryManager.addEventListener(
             "chargingchange",
             atualizarDados
         );
 
 
-        // Quando o tempo estimado mudar
-
         batteryManager.addEventListener(
             "chargingtimechange",
-            atualizarDados
+            atualizarPrevisao
         );
 
 
@@ -263,25 +798,25 @@ async function obterBateria() {
         console.error(erro);
 
         document.getElementById("status").innerText =
-            "❌ Erro ao acessar a bateria.";
+            "❌ Não foi possível acessar a bateria.";
 
     }
 
 }
 
 
-// ========================================
-// ATUALIZAR DADOS
-// ========================================
+// =====================================================
+// ATUALIZAR DADOS DO CELULAR
+// =====================================================
 
 function atualizarDados() {
 
     if (!batteryManager) {
+
         return;
+
     }
 
-
-    // Percentual
 
     bateria =
         Math.round(
@@ -289,15 +824,15 @@ function atualizarDados() {
         );
 
 
-    // Status
-
     const carregando =
         batteryManager.charging;
 
 
-    // Atualizar interface
-
     document.getElementById("bateria").innerText =
+        bateria + "%";
+
+
+    document.getElementById("bateriaAtual").innerText =
         bateria + "%";
 
 
@@ -306,7 +841,9 @@ function atualizarDados() {
         document.getElementById("status").innerText =
             "⚡ Carregando";
 
-    } else {
+    }
+
+    else {
 
         document.getElementById("status").innerText =
             "🔋 Não está carregando";
@@ -314,30 +851,29 @@ function atualizarDados() {
     }
 
 
-    // Atualizar previsão
-
     atualizarPrevisao();
 
 
-    // Registrar histórico
-
     registrarMudanca();
+
+
+    atualizarVariacao();
 
 }
 
 
-// ========================================
+// =====================================================
 // PREVISÃO LUMOS
-// ========================================
+// =====================================================
 
 function atualizarPrevisao() {
 
     if (!batteryManager) {
+
         return;
+
     }
 
-
-    // Se não estiver carregando
 
     if (!batteryManager.charging) {
 
@@ -352,16 +888,37 @@ function atualizarPrevisao() {
     }
 
 
-    // Tempo fornecido pela API
+    // =================================================
+    // DURANTE UMA SESSÃO
+    // =================================================
+    //
+    // Se já temos uma previsão congelada,
+    // não substituímos a cada mudança da API.
+    //
+
+    if (
+        sessaoAtiva &&
+        previsaoCongelada !== null
+    ) {
+
+        mostrarPrevisao(
+            previsaoCongelada
+        );
+
+        return;
+
+    }
+
 
     const tempoAPI =
         batteryManager.chargingTime;
 
 
-    // Infinity significa que o navegador
-    // não conseguiu fornecer uma estimativa
-
-    if (tempoAPI === Infinity) {
+    if (
+        tempoAPI === Infinity ||
+        tempoAPI === null ||
+        isNaN(tempoAPI)
+    ) {
 
         document.getElementById("tempo").innerText =
             "Estimativa indisponível";
@@ -374,27 +931,35 @@ function atualizarPrevisao() {
     }
 
 
-    // Converter segundos para minutos
-
     const minutosAPI =
-        Math.ceil(tempoAPI / 60);
+        Math.ceil(
+            tempoAPI / 60
+        );
 
 
-    // Adicionar margem Lumos
+    mostrarPrevisao(
+        minutosAPI
+    );
+
+}
+
+
+// =====================================================
+// MOSTRAR PREVISÃO
+// =====================================================
+
+function mostrarPrevisao(
+    minutosAPI
+) {
 
     const minutosMax =
-        minutosAPI + MARGEM_MINUTOS;
+        minutosAPI +
+        CONFIG.margemPrevisaoMinutos;
 
-
-    // Mostrar previsão
 
     document.getElementById("tempo").innerText =
         `${minutosAPI}–${minutosMax} minutos`;
 
-
-    // ====================================
-    // CALCULAR HORÁRIO DE TÉRMINO
-    // ====================================
 
     const agora =
         new Date();
@@ -440,20 +1005,18 @@ function atualizarPrevisao() {
 }
 
 
-// ========================================
+// =====================================================
 // REGISTRAR MUDANÇA DE BATERIA
-// ========================================
+// =====================================================
 
 function registrarMudanca() {
 
-    // Só registra se houver sessão ativa
-
     if (!sessaoAtiva) {
+
         return;
+
     }
 
-
-    // Evita registros repetidos
 
     if (
         ultimoPercentualRegistrado === bateria
@@ -474,16 +1037,60 @@ function registrarMudanca() {
         );
 
 
+    let intervaloTexto = "";
+
+
+    if (historico.length > 0) {
+
+        const ultimoRegistro =
+            historico[
+                historico.length - 1
+            ];
+
+
+        const diferenca =
+            agora -
+            ultimoRegistro.data;
+
+
+        const segundos =
+            Math.floor(
+                diferenca / 1000
+            );
+
+
+        const minutos =
+            Math.floor(
+                segundos / 60
+            );
+
+
+        const segundosRestantes =
+            segundos % 60;
+
+
+        intervaloTexto =
+            `${minutos}m ${segundosRestantes}s`;
+
+    }
+
+
     const registro = {
 
         horario: horario,
 
-        bateria: bateria
+        bateria: bateria,
+
+        data: agora,
+
+        intervalo: intervaloTexto
 
     };
 
 
-    historico.push(registro);
+    historico.push(
+        registro
+    );
 
 
     ultimoPercentualRegistrado =
@@ -495,9 +1102,9 @@ function registrarMudanca() {
 }
 
 
-// ========================================
+// =====================================================
 // MOSTRAR HISTÓRICO
-// ========================================
+// =====================================================
 
 function mostrarHistorico() {
 
@@ -508,8 +1115,18 @@ function mostrarHistorico() {
     elemento.innerHTML = "";
 
 
+    if (historico.length === 0) {
+
+        elemento.innerHTML =
+            "<p>Nenhum registro ainda.</p>";
+
+        return;
+
+    }
+
+
     historico.forEach(
-        registro => {
+        (registro, indice) => {
 
             const linha =
                 document.createElement("div");
@@ -520,8 +1137,25 @@ function mostrarHistorico() {
             );
 
 
-            linha.innerText =
+            let texto =
                 `${registro.horario} → ${registro.bateria}%`;
+
+
+            if (
+                indice > 0 &&
+                registro.intervalo
+            ) {
+
+                texto +=
+                    ` <span class="intervalo">
+                    (+${registro.intervalo})
+                    </span>`;
+
+            }
+
+
+            linha.innerHTML =
+                texto;
 
 
             elemento.appendChild(
@@ -534,9 +1168,35 @@ function mostrarHistorico() {
 }
 
 
-// ========================================
+// =====================================================
+// ATUALIZAR VARIAÇÃO
+// =====================================================
+
+function atualizarVariacao() {
+
+    if (
+        bateriaInicialSessao === null
+    ) {
+
+        return;
+
+    }
+
+
+    const variacao =
+        bateria -
+        bateriaInicialSessao;
+
+
+    document.getElementById("variacao").innerText =
+        `${variacao >= 0 ? "+" : ""}${variacao}%`;
+
+}
+
+
+// =====================================================
 // INICIAR / FINALIZAR SESSÃO
-// ========================================
+// =====================================================
 
 function alternarSessao() {
 
@@ -544,64 +1204,689 @@ function alternarSessao() {
         document.getElementById("botao");
 
 
-    // ====================================
+    // =================================================
     // INICIAR
-    // ====================================
+    // =================================================
 
     if (!sessaoAtiva) {
 
-        sessaoAtiva = true;
-
-
-        historico = [];
-
-
-        ultimoPercentualRegistrado =
-            null;
-
-
-        const agora =
-            new Date();
-
-
-        document.getElementById("inicio").innerText =
-            agora.toLocaleTimeString(
-                "pt-BR"
-            );
-
+        iniciarSessao();
 
         botao.innerText =
             "Finalizar sessão";
 
-
-        // Registrar estado inicial
-
-        registrarMudanca();
-
+        return;
 
     }
 
 
-    // ====================================
+    // =================================================
     // FINALIZAR
-    // ====================================
+    // =================================================
 
-    else {
+    finalizarSessao();
 
-        sessaoAtiva = false;
-
-
-        botao.innerText =
-            "Iniciar nova sessão";
-
-    }
+    botao.innerText =
+        "Iniciar nova sessão";
 
 }
 
 
-// ========================================
+// =====================================================
+// INICIAR SESSÃO
+// =====================================================
+
+function iniciarSessao() {
+
+    if (bateria === null) {
+
+        alert(
+            "Aguarde a leitura da bateria."
+        );
+
+        return;
+
+    }
+
+
+    sessaoAtiva = true;
+
+
+    historico = [];
+
+
+    ultimoPercentualRegistrado =
+        null;
+
+
+    inicioSessao =
+        new Date();
+
+
+    bateriaInicialSessao =
+        bateria;
+
+
+    // =================================================
+    // CAPTURAR PREVISÃO INICIAL
+    // =================================================
+
+    previsaoInicialAPI =
+        obterPrevisaoAtual();
+
+
+    previsaoCongelada =
+        previsaoInicialAPI;
+
+
+    document.getElementById("inicio").innerText =
+        inicioSessao.toLocaleTimeString(
+            "pt-BR"
+        );
+
+
+    document.getElementById("bateriaInicial").innerText =
+        bateriaInicialSessao + "%";
+
+
+    document.getElementById("bateriaAtual").innerText =
+        bateria + "%";
+
+
+    document.getElementById("variacao").innerText =
+        "0%";
+
+
+    // Registrar estado inicial.
+
+    registrarMudanca();
+
+
+    atualizarPrevisao();
+
+
+}
+
+
+// =====================================================
+// OBTER PREVISÃO ATUAL DA API
+// =====================================================
+
+function obterPrevisaoAtual() {
+
+    if (!batteryManager) {
+
+        return null;
+
+    }
+
+
+    const tempoAPI =
+        batteryManager.chargingTime;
+
+
+    if (
+        tempoAPI === Infinity ||
+        tempoAPI === null ||
+        isNaN(tempoAPI)
+    ) {
+
+        return null;
+
+    }
+
+
+    return Math.ceil(
+        tempoAPI / 60
+    );
+
+}
+
+
+// =====================================================
+// FINALIZAR SESSÃO
+// =====================================================
+
+function finalizarSessao() {
+
+    sessaoAtiva = false;
+
+
+    const fimSessao =
+        new Date();
+
+
+    // =================================================
+    // CALCULAR VARIAÇÃO
+    // =================================================
+
+    const variacao =
+        bateria -
+        bateriaInicialSessao;
+
+
+    const duracao =
+        fimSessao -
+        inicioSessao;
+
+
+    const segundos =
+        Math.floor(
+            duracao / 1000
+        );
+
+
+    const minutos =
+        Math.floor(
+            segundos / 60
+        );
+
+
+    const segundosRestantes =
+        segundos % 60;
+
+
+    // =================================================
+    // ENERGIA DO CELULAR
+    // =================================================
+
+    const energiaCelular =
+        calcularEnergiaCelular(
+            variacao
+        );
+
+
+    document.getElementById(
+        "resultadoVariacao"
+    ).innerText =
+        `${bateriaInicialSessao}% → ${bateria}%`;
+
+
+    document.getElementById(
+        "resultadoDuracao"
+    ).innerText =
+        `${minutos}m ${segundosRestantes}s`;
+
+
+    document.getElementById(
+        "energiaCelular"
+    ).innerText =
+        formatarEnergia(
+            energiaCelular
+        );
+
+
+    document.getElementById(
+        "resultadoSessao"
+    ).classList.remove(
+        "oculto"
+    );
+
+
+    // =================================================
+    // GERAR SIMULAÇÃO EV
+    // =================================================
+
+    gerarSimulacaoEV(
+        variacao
+    );
+
+
+    document.getElementById(
+        "simulacaoEV"
+    ).classList.remove(
+        "oculto"
+    );
+
+
+    // Reset da previsão.
+
+    previsaoCongelada =
+        null;
+
+
+}
+
+
+// =====================================================
+// CALCULAR ENERGIA DO CELULAR
+// =====================================================
+
+function calcularEnergiaCelular(
+    variacaoPercentual
+) {
+
+    return (
+        Math.abs(variacaoPercentual) / 100
+    ) *
+    CONFIG.capacidadeCelularWh;
+
+}
+
+
+// =====================================================
+// FORMATAR ENERGIA
+// =====================================================
+
+function formatarEnergia(
+    energiaWh
+) {
+
+    if (energiaWh < 1000) {
+
+        return (
+            energiaWh.toFixed(2)
+            + " Wh"
+        );
+
+    }
+
+
+    return (
+        (energiaWh / 1000).toFixed(3)
+        + " kWh"
+    );
+
+}
+
+
+// =====================================================
+// DETERMINAR BANDEIRA LUMOS
+// =====================================================
+
+function determinarBandeira() {
+
+    const solar =
+        ESTACAO.geracaoSolar;
+
+
+    const lynx =
+        ESTACAO.bateriaLynx;
+
+
+    if (
+        solar >= 70 &&
+        lynx > 70
+    ) {
+
+        return {
+
+            nome: "Bandeira Verde",
+
+            classe: "verde",
+
+            icone: "🟢",
+
+            adicional:
+                TARIFAS.verde
+
+        };
+
+    }
+
+
+    if (
+        lynx >= 40 &&
+        lynx <= 70
+    ) {
+
+        return {
+
+            nome: "Bandeira Amarela",
+
+            classe: "amarela",
+
+            icone: "🟡",
+
+            adicional:
+                TARIFAS.amarela
+
+        };
+
+    }
+
+
+    return {
+
+        nome: "Bandeira Vermelha",
+
+        classe: "vermelha",
+
+        icone: "🔴",
+
+        adicional:
+            TARIFAS.vermelha
+
+    };
+
+}
+
+
+// =====================================================
+// VERIFICAR HORÁRIO NOTURNO
+// =====================================================
+
+function estaNoHorarioNoturno() {
+
+    const hora =
+        new Date().getHours();
+
+
+    return (
+        hora >= CONFIG.inicioNoturno &&
+        hora < CONFIG.fimNoturno
+    );
+
+}
+
+
+// =====================================================
+// CALCULAR TARIFA EFETIVA
+// =====================================================
+
+function calcularTarifa() {
+
+    const bandeira =
+        determinarBandeira();
+
+
+    let tarifa =
+        TARIFAS.base +
+        bandeira.adicional;
+
+
+    let desconto =
+        0;
+
+
+    if (
+        estaNoHorarioNoturno()
+    ) {
+
+        desconto =
+            TARIFAS.descontoNoturno;
+
+        tarifa -=
+            desconto;
+
+    }
+
+
+    // Impede tarifa negativa.
+
+    if (tarifa < 0) {
+
+        tarifa = 0;
+
+    }
+
+
+    return {
+
+        bandeira: bandeira,
+
+        tarifa: tarifa,
+
+        desconto: desconto
+
+    };
+
+}
+
+
+// =====================================================
+// ATUALIZAR ESTAÇÃO NA INTERFACE
+// =====================================================
+
+function atualizarEstacao() {
+
+    document.getElementById(
+        "solar"
+    ).innerText =
+        ESTACAO.geracaoSolar + "%";
+
+
+    document.getElementById(
+        "lynx"
+    ).innerText =
+        ESTACAO.bateriaLynx + "%";
+
+
+    const dados =
+        calcularTarifa();
+
+
+    const elementoBandeira =
+        document.getElementById(
+            "bandeira"
+        );
+
+
+    elementoBandeira.className =
+        "bandeira " +
+        dados.bandeira.classe;
+
+
+    elementoBandeira.innerHTML =
+
+        `${dados.bandeira.icone}
+        ${dados.bandeira.nome}
+        <br>
+        <small>
+        Adicional: +R$ ${dados.bandeira.adicional.toFixed(2)}/kWh
+        </small>`;
+
+
+    document.getElementById(
+        "tarifaEfetiva"
+    ).innerText =
+
+        `R$ ${dados.tarifa.toFixed(2)}/kWh`;
+
+
+    let detalhe =
+
+        `Base: R$ ${TARIFAS.base.toFixed(2)}
+        + adicional: R$ ${dados.bandeira.adicional.toFixed(2)}`;
+
+
+    if (dados.desconto > 0) {
+
+        detalhe +=
+
+            ` − desconto noturno:
+            R$ ${dados.desconto.toFixed(2)}`;
+
+    }
+
+
+    document.getElementById(
+        "detalheTarifa"
+    ).innerText =
+        detalhe;
+
+}
+
+
+// =====================================================
+// GERAR SIMULAÇÃO DOS VEÍCULOS
+// =====================================================
+
+function gerarSimulacaoEV(
+    variacaoPercentual
+) {
+
+    const container =
+        document.getElementById(
+            "veiculos"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const dadosTarifa =
+        calcularTarifa();
+
+
+    const tarifa =
+        dadosTarifa.tarifa;
+
+
+    VEICULOS.forEach(
+        veiculo => {
+
+
+            // =========================================
+            // ENERGIA ARMAZENADA NA BATERIA
+            // =========================================
+
+            const energiaArmazenada =
+                (
+                    Math.abs(
+                        variacaoPercentual
+                    ) / 100
+                ) *
+                veiculo.capacidade;
+
+
+            // =========================================
+            // ENERGIA ESTIMADA RETIRADA DA ESTAÇÃO
+            // =========================================
+            //
+            // Consideramos 85% de eficiência.
+            //
+
+            const energiaEstacao =
+                energiaArmazenada /
+                CONFIG.eficienciaCarregamento;
+
+
+            // =========================================
+            // CUSTO
+            // =========================================
+
+            const custo =
+                energiaEstacao *
+                tarifa;
+
+
+            // =========================================
+            // CUSTO SEM DESCONTO NOTURNO
+            // =========================================
+
+            const tarifaSemNoturno =
+                TARIFAS.base +
+                dadosTarifa.bandeira.adicional;
+
+
+            const custoSemNoturno =
+                energiaEstacao *
+                tarifaSemNoturno;
+
+
+            const economia =
+                custoSemNoturno -
+                custo;
+
+
+            // =========================================
+            // CRIAR ELEMENTO
+            // =========================================
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.classList.add(
+                "veiculo"
+            );
+
+
+            div.innerHTML = `
+
+                <div class="veiculo-titulo">
+
+                    ${veiculo.icone}
+                    ${veiculo.nome}
+
+                </div>
+
+                <div class="veiculo-detalhe">
+
+                    Bateria:
+                    <strong>
+                        ${veiculo.capacidade} kWh
+                    </strong>
+
+                </div>
+
+                <div class="veiculo-detalhe">
+
+                    Mesma variação:
+                    <strong>
+                        ${Math.abs(variacaoPercentual)}%
+                    </strong>
+
+                </div>
+
+                <div class="veiculo-detalhe">
+
+                    Energia armazenada:
+                    <strong>
+                        ${energiaArmazenada.toFixed(2)} kWh
+                    </strong>
+
+                </div>
+
+                <div class="veiculo-detalhe">
+
+                    Energia estimada da estação:
+                    <strong>
+                        ${energiaEstacao.toFixed(2)} kWh
+                    </strong>
+
+                </div>
+
+                <div class="veiculo-custo">
+
+                    R$ ${custo.toFixed(2)}
+
+                </div>
+
+                ${
+                    economia > 0
+                    ?
+                    `
+                    <div class="economia">
+
+                        🌙 Economia noturna:
+                        R$ ${economia.toFixed(2)}
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+
+// =====================================================
 // BOTÃO
-// ========================================
+// =====================================================
 
 document
     .getElementById("botao")
@@ -611,11 +1896,22 @@ document
     );
 
 
-// ========================================
-// INICIAR
-// ========================================
+// =====================================================
+// INICIALIZAÇÃO
+// =====================================================
+
+atualizarEstacao();
 
 obterBateria();
+
+
+// Atualiza a estação periodicamente.
+
+intervalo =
+    setInterval(
+        atualizarEstacao,
+        30000
+    );
 
 
 </script>
