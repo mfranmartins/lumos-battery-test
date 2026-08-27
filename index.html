@@ -1,135 +1,369 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Teste de Bateria - Lumos</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Lumos Battery Test</title>
 
     <style>
+
         body {
             font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        h1 {
             text-align: center;
-            padding: 40px;
         }
 
         .card {
-            max-width: 400px;
-            margin: auto;
-            padding: 30px;
+            background: white;
+            padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.10);
         }
 
-        .valor {
-            font-size: 32px;
+        .bateria {
+            font-size: 50px;
             font-weight: bold;
-            margin: 15px;
+            text-align: center;
         }
+
+        .status {
+            text-align: center;
+            font-size: 20px;
+            margin: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #historico {
+            margin-top: 20px;
+        }
+
+        .registro {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
     </style>
+
 </head>
 
 <body>
 
+<div class="container">
+
+    <h1>🔋 Lumos Battery</h1>
+
     <div class="card">
 
-        <h1>🔋 Teste Lumos</h1>
+        <div id="bateria" class="bateria">
+            --%
+        </div>
 
-        <p>Bateria:</p>
-        <div id="bateria" class="valor">--%</div>
+        <div id="status" class="status">
+            Verificando...
+        </div>
 
-        <p>Status:</p>
-        <div id="status" class="valor">--</div>
-
-        <p>Tempo até 100%:</p>
-        <div id="tempo" class="valor">--</div>
-
-        <p id="erro"></p>
+        <button id="botao">
+            Iniciar sessão
+        </button>
 
     </div>
 
-    <script>
 
-        async function obterBateria() {
+    <div class="card">
 
-            // Verifica se o navegador possui a API
-            if (!("getBattery" in navigator)) {
+        <h2>📊 Sessão de carregamento</h2>
 
-                document.getElementById("erro").innerText =
-                    "❌ Este navegador não disponibiliza a Battery API.";
+        <p>
+            Início:
+            <span id="inicio">--</span>
+        </p>
 
-                return;
+        <div id="historico">
+
+            <p>
+                Nenhum registro ainda.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let bateriaAtual = null;
+
+let carregando = false;
+
+let sessaoAtiva = false;
+
+let intervalo = null;
+
+let historico = [];
+
+
+// ========================================
+// OBTER INFORMAÇÕES DA BATERIA
+// ========================================
+
+async function obterBateria() {
+
+    if (!("getBattery" in navigator)) {
+
+        document.getElementById("status").innerText =
+            "❌ Battery API não disponível";
+
+        return;
+
+    }
+
+    try {
+
+        const battery = await navigator.getBattery();
+
+        bateriaAtual =
+            Math.round(battery.level * 100);
+
+        carregando =
+            battery.charging;
+
+
+        atualizarTela();
+
+
+        // Quando o percentual mudar
+        battery.addEventListener(
+            "levelchange",
+            () => {
+
+                bateriaAtual =
+                    Math.round(battery.level * 100);
+
+                atualizarTela();
+
             }
-
-            try {
-
-                const battery = await navigator.getBattery();
-
-                function atualizar() {
-
-                    // Porcentagem
-                    const porcentagem =
-                        Math.round(battery.level * 100);
-
-                    document.getElementById("bateria").innerText =
-                        porcentagem + "%";
+        );
 
 
-                    // Status
-                    document.getElementById("status").innerText =
-                        battery.charging
-                            ? "⚡ Carregando"
-                            : "🔋 Desconectado";
+        // Quando começar/parar de carregar
+        battery.addEventListener(
+            "chargingchange",
+            () => {
 
+                carregando =
+                    battery.charging;
 
-                    // Tempo restante
-                    if (battery.chargingTime !== Infinity) {
-
-                        const minutos =
-                            Math.round(battery.chargingTime / 60);
-
-                        document.getElementById("tempo").innerText =
-                            minutos + " minutos";
-
-                    } else {
-
-                        document.getElementById("tempo").innerText =
-                            "Indisponível";
-                    }
-                }
-
-                // Atualiza imediatamente
-                atualizar();
-
-                // Atualiza quando a bateria mudar
-                battery.addEventListener(
-                    "levelchange",
-                    atualizar
-                );
-
-                battery.addEventListener(
-                    "chargingchange",
-                    atualizar
-                );
-
-                battery.addEventListener(
-                    "chargingtimechange",
-                    atualizar
-                );
-
-            } catch (erro) {
-
-                console.error(erro);
-
-                document.getElementById("erro").innerText =
-                    "❌ Não foi possível acessar a bateria.";
+                atualizarTela();
 
             }
-        }
+        );
 
-        obterBateria();
 
-    </script>
+    } catch (erro) {
+
+        console.error(erro);
+
+        document.getElementById("status").innerText =
+            "❌ Erro ao acessar bateria.";
+
+    }
+
+}
+
+
+// ========================================
+// ATUALIZAR INTERFACE
+// ========================================
+
+function atualizarTela() {
+
+    document.getElementById("bateria").innerText =
+        bateriaAtual + "%";
+
+
+    if (carregando) {
+
+        document.getElementById("status").innerText =
+            "⚡ Carregando";
+
+    } else {
+
+        document.getElementById("status").innerText =
+            "🔋 Não está carregando";
+
+    }
+
+}
+
+
+// ========================================
+// REGISTRAR DADOS
+// ========================================
+
+function registrarBateria() {
+
+    if (!sessaoAtiva) {
+        return;
+    }
+
+
+    const agora = new Date();
+
+
+    const horario =
+        agora.toLocaleTimeString("pt-BR");
+
+
+    const registro = {
+
+        horario: horario,
+
+        bateria: bateriaAtual
+
+    };
+
+
+    historico.push(registro);
+
+
+    mostrarHistorico();
+
+}
+
+
+// ========================================
+// MOSTRAR HISTÓRICO
+// ========================================
+
+function mostrarHistorico() {
+
+    const elemento =
+        document.getElementById("historico");
+
+
+    elemento.innerHTML = "";
+
+
+    historico.forEach(registro => {
+
+        const linha =
+            document.createElement("div");
+
+
+        linha.classList.add("registro");
+
+
+        linha.innerText =
+            `${registro.horario} → ${registro.bateria}%`;
+
+
+        elemento.appendChild(linha);
+
+    });
+
+}
+
+
+// ========================================
+// INICIAR / PARAR SESSÃO
+// ========================================
+
+function alternarSessao() {
+
+    const botao =
+        document.getElementById("botao");
+
+
+    if (!sessaoAtiva) {
+
+        // Começar sessão
+
+        sessaoAtiva = true;
+
+        historico = [];
+
+
+        const agora = new Date();
+
+        document.getElementById("inicio").innerText =
+            agora.toLocaleTimeString("pt-BR");
+
+
+        botao.innerText =
+            "Finalizar sessão";
+
+
+        registrarBateria();
+
+
+        // Registrar a cada 10 segundos
+
+        intervalo = setInterval(
+            registrarBateria,
+            10000
+        );
+
+
+    } else {
+
+        // Finalizar sessão
+
+        sessaoAtiva = false;
+
+
+        clearInterval(intervalo);
+
+
+        intervalo = null;
+
+
+        botao.innerText =
+            "Iniciar nova sessão";
+
+    }
+
+}
+
+
+document.getElementById("botao")
+    .addEventListener(
+        "click",
+        alternarSessao
+    );
+
+
+// Iniciar leitura da bateria
+
+obterBateria();
+
+</script>
 
 </body>
+
 </html>
