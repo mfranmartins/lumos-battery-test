@@ -3,15 +3,10 @@
 <html lang="pt-BR">
 
 <head>
-
-```
 <meta charset="UTF-8">
-
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
-
 <title>Lumos Battery Test - V5C.1</title>
-
 <style>
 
     * {
@@ -141,21 +136,12 @@
     }
 
 </style>
-```
-
 </head>
-
 <body>
-
 <div class="container">
-
-```
 <h1>⚡ Lumos</h1>
 
-
-<!-- ================================= -->
 <!-- BATERIA -->
-<!-- ================================= -->
 
 <div class="card">
 
@@ -169,80 +155,53 @@
 
 </div>
 
-
-<!-- ================================= -->
 <!-- PREVISÃO -->
-<!-- ================================= -->
 
 <div class="card">
-
     <h2>⏱️ Previsão Lumos</h2>
-
     <div class="previsao">
-
         <div
             class="tempo"
             id="tempo">
-
             --
-
         </div>
 
         <div
             class="termino"
             id="termino">
-
             --
-
         </div>
-
     </div>
 
     <div class="observacao">
-
         Estimativa fornecida pelo dispositivo
         + margem de segurança Lumos de
         20 minutos.
-
     </div>
-
 </div>
 
-
-<!-- ================================= -->
 <!-- ESTAÇÃO -->
-<!-- ================================= -->
 
 <div class="card">
-
     <h2>⚡ Estação Lumos</h2>
-
     <div class="info">
-
         ☀️ Geração solar:
-
         <strong id="solar">
             --
         </strong>%
-
     </div>
 
     <div class="info">
-
         🔋 Bateria Lynx:
-
         <strong id="lynx">
             --
         </strong>%
-
     </div>
 
     <div
         id="bandeira"
         class="bandeira">
-
         --
-
     </div>
 
     <div class="info">
@@ -428,107 +387,47 @@
 
 <script>
 
-
-// ========================================
 // CONFIGURAÇÕES
-// ========================================
 
-const ESP32 =
-    "http://192.168.15.5";
+const ESP32 = "http://192.168.15.5";
+const MARGEM_MINUTOS = 20;
+const TARIFA_BASE = 2.00;
+const TARIFA_VERDE = 0.85;
+const TARIFA_AMARELA = 1.20;
+const TARIFA_VERMELHA = 1.60;
+const DESCONTO_NOTURNO = 0.20;
+const CAPACIDADE_CELULAR = 0.0194;
 
-
-const MARGEM_MINUTOS =
-    20;
-
-
-const TARIFA_BASE =
-    2.00;
-
-
-const TARIFA_VERDE =
-    0.85;
-
-
-const TARIFA_AMARELA =
-    1.20;
-
-
-const TARIFA_VERMELHA =
-    1.60;
-
-
-const DESCONTO_NOTURNO =
-    0.20;
-
-
-const CAPACIDADE_CELULAR =
-    0.0194;
-
-
-// ========================================
 // VARIÁVEIS
-// ========================================
 
-let batteryManager =
-    null;
+let batteryManager = null;
+let bateria = null;
+let sessaoAtiva = false;
+let inicioSessao = null;
+let percentualInicial = null;
+let ultimoPercentualRegistrado = null;
+let ultimoEstadoRecargaEnviado =null;
+let ultimoBandeira = null;
+let ultimoNoturno = null;
+let historico = [];
+let historicoBandeiras = [];
+let dadosEstacao = null;
+let ultimoTempoAPI = null;
+let energiaSessao = 0;
 
-let bateria =
-    null;
-
-let sessaoAtiva =
-    false;
-
-let inicioSessao =
-    null;
-
-let percentualInicial =
-    null;
-
-let ultimoPercentualRegistrado =
-    null;
-
-let ultimoEstadoRecargaEnviado =
-    null;
-
-let ultimoBandeira =
-    null;
-
-let ultimoNoturno =
-    null;
-
-let historico =
-    [];
-
-let historicoBandeiras =
-    [];
-
-let dadosEstacao =
-    null;
-
-let ultimoTempoAPI =
-    null;
-
-
-// ========================================
 // FUNÇÃO DE TARIFA
-// ========================================
 
 function calcularTarifa(
     bandeira,
     noturno
 ) {
-
     let tarifa =
         TARIFA_BASE;
-
-
     if (
         bandeira === "VERDE"
     ) {
-
         tarifa +=
             TARIFA_VERDE;
-
     }
 
     else if (
@@ -1988,6 +1887,25 @@ setInterval(
     5000
 );
 
+// ========================================
+// BOTÃO DE SESSÃO
+// ========================================
+
+document
+    .getElementById("botao")
+    .addEventListener("click", function () {
+
+        if (!sessaoAtiva) {
+
+            iniciarSessao();
+
+        } else {
+
+            finalizarSessao();
+
+        }
+
+    });
 
 // ========================================
 // INICIALIZAÇÃO
@@ -1996,7 +1914,6 @@ setInterval(
 obterBateria();
 
 buscarEstacao();
-
 
 </script>
 
