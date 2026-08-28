@@ -10,8 +10,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Lumos Battery Test - V5C</title>
-
+<title>Lumos Battery Test - V5C.1</title>
 
 <style>
 
@@ -19,219 +18,126 @@
         box-sizing: border-box;
     }
 
-
     body {
-
         font-family: Arial, sans-serif;
-
         background: #f5f5f5;
-
         margin: 0;
-
         padding: 20px;
-
         color: #222;
-
     }
-
 
     .container {
-
         max-width: 550px;
-
         margin: auto;
-
     }
-
 
     h1 {
-
         text-align: center;
-
     }
-
 
     .card {
-
         background: white;
-
         padding: 25px;
-
         border-radius: 20px;
-
         margin-top: 20px;
-
-        box-shadow:
-            0 4px 15px
-            rgba(0,0,0,0.10);
-
+        box-shadow: 0 4px 15px rgba(0,0,0,0.10);
     }
-
 
     .bateria {
-
         font-size: 50px;
-
         font-weight: bold;
-
         text-align: center;
-
     }
-
 
     .status {
-
         text-align: center;
-
         font-size: 20px;
-
         margin: 10px;
-
     }
-
 
     .previsao {
-
         text-align: center;
-
         margin-top: 25px;
-
     }
-
 
     .tempo {
-
         font-size: 28px;
-
         font-weight: bold;
-
     }
-
 
     .termino {
-
         margin-top: 10px;
-
         font-size: 18px;
-
     }
-
 
     .observacao {
-
         margin-top: 15px;
-
         font-size: 13px;
-
         color: #666;
-
         text-align: center;
-
     }
-
 
     button {
-
         width: 100%;
-
         padding: 15px;
-
         border: none;
-
         border-radius: 10px;
-
         font-size: 18px;
-
         cursor: pointer;
-
         margin-top: 20px;
-
     }
-
 
     .info {
-
         font-size: 18px;
-
         margin: 10px 0;
-
     }
-
 
     .bandeira {
-
         text-align: center;
-
         font-size: 30px;
-
         font-weight: bold;
-
         margin: 15px 0;
-
     }
-
 
     .estacao-status {
-
         text-align: center;
-
         padding: 10px;
-
         border-radius: 10px;
-
         background: #f1f1f1;
-
         margin-top: 15px;
-
     }
-
 
     .registro {
-
         padding: 10px 0;
-
         border-bottom: 1px solid #ddd;
-
     }
-
 
     .vazio {
-
         color: #777;
-
         text-align: center;
-
     }
-
 
     .veiculo {
-
         padding: 12px;
-
         border-bottom: 1px solid #ddd;
-
     }
-
 
     .valor {
-
         font-size: 20px;
-
         font-weight: bold;
-
     }
 
-
     .total {
-
         font-size: 28px;
-
         font-weight: bold;
-
         text-align: center;
-
         margin-top: 15px;
+    }
 
+    .resumo {
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
     }
 
 </style>
@@ -248,7 +154,7 @@
 
 
 <!-- ================================= -->
-<!-- BATERIA DO CELULAR -->
+<!-- BATERIA -->
 <!-- ================================= -->
 
 <div class="card">
@@ -256,7 +162,6 @@
     <div id="bateria" class="bateria">
         --%
     </div>
-
 
     <div id="status" class="status">
         Verificando bateria...
@@ -273,7 +178,6 @@
 
     <h2>⏱️ Previsão Lumos</h2>
 
-
     <div class="previsao">
 
         <div
@@ -283,7 +187,6 @@
             --
 
         </div>
-
 
         <div
             class="termino"
@@ -295,12 +198,10 @@
 
     </div>
 
-
     <div class="observacao">
 
-        A previsão utiliza a estimativa
-        fornecida pelo dispositivo com
-        uma margem de segurança de
+        Estimativa fornecida pelo dispositivo
+        + margem de segurança Lumos de
         20 minutos.
 
     </div>
@@ -309,13 +210,12 @@
 
 
 <!-- ================================= -->
-<!-- ESTAÇÃO LUMOS -->
+<!-- ESTAÇÃO -->
 <!-- ================================= -->
 
 <div class="card">
 
     <h2>⚡ Estação Lumos</h2>
-
 
     <div class="info">
 
@@ -327,7 +227,6 @@
 
     </div>
 
-
     <div class="info">
 
         🔋 Bateria Lynx:
@@ -338,7 +237,6 @@
 
     </div>
 
-
     <div
         id="bandeira"
         class="bandeira">
@@ -346,7 +244,6 @@
         --
 
     </div>
-
 
     <div class="info">
 
@@ -358,7 +255,6 @@
 
     </div>
 
-
     <div
         id="recargaEstacao"
         class="estacao-status">
@@ -366,7 +262,6 @@
         ⚪ Estação aguardando recarga
 
     </div>
-
 
     <div
         class="observacao"
@@ -387,7 +282,6 @@
 
     <h2>📊 Sessão de carregamento</h2>
 
-
     <p>
 
         Início:
@@ -398,25 +292,31 @@
 
     </p>
 
-
     <p>
 
         Duração:
 
         <span id="duracao">
             --
-
         </span>
 
     </p>
 
+    <p>
+
+        Variação:
+
+        <span id="variacao">
+            --
+        </span>
+
+    </p>
 
     <button id="botao">
 
         Iniciar sessão
 
     </button>
-
 
     <div id="historico">
 
@@ -439,7 +339,6 @@
 
     <h2>🚦 Histórico energético</h2>
 
-
     <div id="historicoBandeiras">
 
         <p class="vazio">
@@ -459,8 +358,7 @@
 
 <div class="card">
 
-    <h2>💰 Custo estimado</h2>
-
+    <h2>💰 Custo da sessão</h2>
 
     <div class="info">
 
@@ -472,7 +370,6 @@
 
     </div>
 
-
     <div class="info">
 
         Energia estimada:
@@ -483,10 +380,17 @@
 
     </div>
 
+    <div
+        id="resumoFinanceiro"
+        class="resumo">
+
+    </div>
 
     <div class="total">
 
-        R$ <span id="valorSessao">
+        R$
+
+        <span id="valorSessao">
             0,00
         </span>
 
@@ -496,22 +400,20 @@
 
 
 <!-- ================================= -->
-<!-- SIMULAÇÃO DE VEÍCULOS -->
+<!-- VEÍCULOS -->
 <!-- ================================= -->
 
 <div class="card">
 
     <h2>🚗 Equivalência para veículos elétricos</h2>
 
-
     <p>
 
-        Simulação baseada na mesma
-        proporção de carga observada
+        Simulação utilizando a mesma
+        porcentagem de carga observada
         no celular.
 
     </p>
-
 
     <div id="veiculos">
 
@@ -535,69 +437,76 @@ const ESP32 =
     "http://192.168.15.5";
 
 
-const MARGEM_MINUTOS = 20;
+const MARGEM_MINUTOS =
+    20;
 
 
-// Tarifa base
-
-const TARIFA_BASE = 2.00;
-
-
-// Adicionais Lumos
-
-const TARIFA_VERDE = 0.85;
-
-const TARIFA_AMARELA = 1.20;
-
-const TARIFA_VERMELHA = 1.60;
+const TARIFA_BASE =
+    2.00;
 
 
-// Desconto noturno
+const TARIFA_VERDE =
+    0.85;
 
-const DESCONTO_NOTURNO = 0.20;
+
+const TARIFA_AMARELA =
+    1.20;
+
+
+const TARIFA_VERMELHA =
+    1.60;
+
+
+const DESCONTO_NOTURNO =
+    0.20;
+
+
+const CAPACIDADE_CELULAR =
+    0.0194;
 
 
 // ========================================
 // VARIÁVEIS
 // ========================================
 
-let batteryManager = null;
+let batteryManager =
+    null;
 
+let bateria =
+    null;
 
-let bateria = null;
+let sessaoAtiva =
+    false;
 
+let inicioSessao =
+    null;
 
-let sessaoAtiva = false;
+let percentualInicial =
+    null;
 
+let ultimoPercentualRegistrado =
+    null;
 
-let inicioSessao = null;
+let ultimoEstadoRecargaEnviado =
+    null;
 
+let ultimoBandeira =
+    null;
 
-let percentualInicial = null;
+let ultimoNoturno =
+    null;
 
+let historico =
+    [];
 
-let ultimoPercentualRegistrado = null;
+let historicoBandeiras =
+    [];
 
+let dadosEstacao =
+    null;
 
-let ultimoEstadoRecargaEnviado = null;
-
-
-let ultimoBandeira = null;
-
-
-let ultimoNoturno = null;
-
-
-let historico = [];
-
-
-let historicoBandeiras = [];
-
-
-let energiaSessao = 0;
-
-
-let valorSessao = 0;
+let ultimoTempoAPI =
+    null;
 
 
 // ========================================
@@ -622,7 +531,6 @@ function calcularTarifa(
 
     }
 
-
     else if (
         bandeira === "AMARELA"
     ) {
@@ -631,7 +539,6 @@ function calcularTarifa(
             TARIFA_AMARELA;
 
     }
-
 
     else if (
         bandeira === "VERMELHA"
@@ -657,18 +564,20 @@ function calcularTarifa(
 
 
 // ========================================
-// MOSTRAR TARIFA
+// ATUALIZAR TARIFA
 // ========================================
 
-function atualizarTarifa(
-    bandeira,
-    noturno
-) {
+function atualizarTarifa() {
+
+    if (!dadosEstacao) {
+        return;
+    }
+
 
     const tarifa =
         calcularTarifa(
-            bandeira,
-            noturno
+            dadosEstacao.bandeira,
+            dadosEstacao.noturno
         );
 
 
@@ -676,11 +585,9 @@ function atualizarTarifa(
         .getElementById("tarifaAtual")
         .innerText =
         "R$ " +
-        tarifa.toFixed(2)
+        tarifa
+            .toFixed(2)
             .replace(".", ",");
-
-
-    return tarifa;
 
 }
 
@@ -692,10 +599,6 @@ function atualizarTarifa(
 async function informarRecargaESP32(
     estaCarregando
 ) {
-
-
-    // Não envia novamente
-    // se o estado não mudou
 
     if (
         ultimoEstadoRecargaEnviado ===
@@ -735,23 +638,22 @@ async function informarRecargaESP32(
 
 
         console.log(
+
             estaCarregando
-                ? "🔵 Recarga iniciada no ESP32"
-                : "⚪ Recarga finalizada no ESP32"
+                ? "🔵 Recarga iniciada"
+                : "⚪ Recarga finalizada"
+
         );
 
     }
 
-
     catch (erro) {
 
         console.error(
-            "Erro ao comunicar com ESP32:",
+            "Erro ESP32:",
             erro
         );
 
-
-        // Permite nova tentativa
 
         ultimoEstadoRecargaEnviado =
             null;
@@ -766,7 +668,6 @@ async function informarRecargaESP32(
 // ========================================
 
 async function obterBateria() {
-
 
     if (
         !("getBattery" in navigator)
@@ -810,18 +711,11 @@ async function obterBateria() {
 
     }
 
-
     catch (erro) {
 
         console.error(
             erro
         );
-
-
-        document
-            .getElementById("status")
-            .innerText =
-            "❌ Erro ao acessar bateria.";
 
     }
 
@@ -829,16 +723,13 @@ async function obterBateria() {
 
 
 // ========================================
-// ATUALIZAR DADOS DA BATERIA
+// ATUALIZAR DADOS
 // ========================================
 
 function atualizarDados() {
 
-
     if (!batteryManager) {
-
         return;
-
     }
 
 
@@ -858,38 +749,21 @@ function atualizarDados() {
         bateria + "%";
 
 
-    if (carregando) {
+    document
+        .getElementById("status")
+        .innerText =
+        carregando
+            ? "⚡ Carregando"
+            : "🔋 Não está carregando";
 
-        document
-            .getElementById("status")
-            .innerText =
-            "⚡ Carregando";
-
-    }
-
-    else {
-
-        document
-            .getElementById("status")
-            .innerText =
-            "🔋 Não está carregando";
-
-    }
-
-
-    // Comunicar estado ao ESP32
 
     informarRecargaESP32(
         carregando
     );
 
 
-    // Atualizar previsão
-
     atualizarPrevisao();
 
-
-    // Registrar bateria
 
     registrarMudanca();
 
@@ -902,11 +776,8 @@ function atualizarDados() {
 
 function atualizarPrevisao() {
 
-
     if (!batteryManager) {
-
         return;
-
     }
 
 
@@ -926,6 +797,10 @@ function atualizarPrevisao() {
             "--";
 
 
+        ultimoTempoAPI =
+            null;
+
+
         return;
 
     }
@@ -935,21 +810,41 @@ function atualizarPrevisao() {
         batteryManager.chargingTime;
 
 
+    // ====================================
+    // PROTEÇÃO CONTRA INFINITY
+    // ====================================
+
     if (
-        tempoAPI === Infinity
+        tempoAPI === Infinity ||
+        tempoAPI === null ||
+        isNaN(tempoAPI)
     ) {
 
-        document
-            .getElementById("tempo")
-            .innerText =
-            "Estimativa indisponível";
+        // Mantém a última estimativa válida
 
+        if (
+            ultimoTempoAPI !== null
+        ) {
 
-        document
-            .getElementById("termino")
-            .innerText =
-            "--";
+            mostrarPrevisao(
+                ultimoTempoAPI
+            );
 
+        }
+
+        else {
+
+            document
+                .getElementById("tempo")
+                .innerText =
+                "Estimativa indisponível";
+
+            document
+                .getElementById("termino")
+                .innerText =
+                "--";
+
+        }
 
         return;
 
@@ -957,10 +852,32 @@ function atualizarPrevisao() {
 
 
     const minutosAPI =
-        Math.ceil(
-            tempoAPI / 60
+        Math.max(
+            1,
+            Math.ceil(
+                tempoAPI / 60
+            )
         );
 
+
+    ultimoTempoAPI =
+        minutosAPI;
+
+
+    mostrarPrevisao(
+        minutosAPI
+    );
+
+}
+
+
+// ========================================
+// MOSTRAR PREVISÃO
+// ========================================
+
+function mostrarPrevisao(
+    minutosAPI
+) {
 
     const minutosMax =
         minutosAPI +
@@ -981,8 +898,7 @@ function atualizarPrevisao() {
         new Date(
             agora.getTime() +
             minutosAPI *
-            60 *
-            1000
+            60000
         );
 
 
@@ -990,8 +906,7 @@ function atualizarPrevisao() {
         new Date(
             agora.getTime() +
             minutosMax *
-            60 *
-            1000
+            60000
         );
 
 
@@ -1024,16 +939,13 @@ function atualizarPrevisao() {
 
 
 // ========================================
-// REGISTRAR MUDANÇA DE BATERIA
+// REGISTRAR PORCENTAGEM
 // ========================================
 
 function registrarMudanca() {
 
-
     if (!sessaoAtiva) {
-
         return;
-
     }
 
 
@@ -1051,6 +963,27 @@ function registrarMudanca() {
         new Date();
 
 
+    let tempoDesdeAnterior =
+        null;
+
+
+    if (
+        historico.length > 0
+    ) {
+
+        const anterior =
+            historico[
+                historico.length - 1
+            ];
+
+
+        tempoDesdeAnterior =
+            agora.getTime() -
+            anterior.timestamp;
+
+    }
+
+
     historico.push({
 
         horario:
@@ -1059,7 +992,13 @@ function registrarMudanca() {
             ),
 
         bateria:
-            bateria
+            bateria,
+
+        timestamp:
+            agora.getTime(),
+
+        intervalo:
+            tempoDesdeAnterior
 
     });
 
@@ -1074,11 +1013,50 @@ function registrarMudanca() {
 
 
 // ========================================
+// FORMATAR DURAÇÃO
+// ========================================
+
+function formatarDuracao(
+    milissegundos
+) {
+
+    if (
+        milissegundos === null
+    ) {
+
+        return "--";
+
+    }
+
+
+    const segundos =
+        Math.floor(
+            milissegundos / 1000
+        );
+
+
+    const minutos =
+        Math.floor(
+            segundos / 60
+        );
+
+
+    const segundosRestantes =
+        segundos % 60;
+
+
+    return `${minutos}min ${String(
+        segundosRestantes
+    ).padStart(2, "0")}s`;
+
+}
+
+
+// ========================================
 // MOSTRAR HISTÓRICO
 // ========================================
 
 function mostrarHistorico() {
-
 
     const elemento =
         document.getElementById(
@@ -1092,7 +1070,6 @@ function mostrarHistorico() {
     historico.forEach(
         registro => {
 
-
             const linha =
                 document.createElement(
                     "div"
@@ -1104,8 +1081,25 @@ function mostrarHistorico() {
             );
 
 
+            let texto =
+                `${registro.horario} → ` +
+                `${registro.bateria}%`;
+
+
+            if (
+                registro.intervalo !== null
+            ) {
+
+                texto +=
+                    ` | +${formatarDuracao(
+                        registro.intervalo
+                    )}`;
+
+            }
+
+
             linha.innerText =
-                `${registro.horario} → ${registro.bateria}%`;
+                texto;
 
 
             elemento.appendChild(
@@ -1123,7 +1117,6 @@ function mostrarHistorico() {
 // ========================================
 
 async function buscarEstacao() {
-
 
     try {
 
@@ -1146,9 +1139,9 @@ async function buscarEstacao() {
             await resposta.json();
 
 
-        // =================================
-        // DADOS ATUAIS
-        // =================================
+        dadosEstacao =
+            dados;
+
 
         document
             .getElementById("solar")
@@ -1180,19 +1173,8 @@ async function buscarEstacao() {
                 : "INATIVO";
 
 
-        // =================================
-        // TARIFA
-        // =================================
+        atualizarTarifa();
 
-        atualizarTarifa(
-            dados.bandeira,
-            dados.noturno
-        );
-
-
-        // =================================
-        // RECARGA
-        // =================================
 
         if (dados.recarga) {
 
@@ -1217,10 +1199,6 @@ async function buscarEstacao() {
         }
 
 
-        // =================================
-        // ATUALIZAÇÃO
-        // =================================
-
         document
             .getElementById(
                 "ultimaAtualizacao"
@@ -1233,17 +1211,12 @@ async function buscarEstacao() {
                 );
 
 
-        // =================================
-        // HISTÓRICO DA BANDEIRA
-        // =================================
-
         registrarMudancaEstacao(
             dados.bandeira,
             dados.noturno
         );
 
     }
-
 
     catch (erro) {
 
@@ -1265,7 +1238,7 @@ async function buscarEstacao() {
 
 
 // ========================================
-// EMOJI DA BANDEIRA
+// EMOJI BANDEIRA
 // ========================================
 
 function obterEmojiBandeira(
@@ -1275,27 +1248,21 @@ function obterEmojiBandeira(
     if (
         bandeira === "VERDE"
     ) {
-
         return "🟢";
-
     }
 
 
     if (
         bandeira === "AMARELA"
     ) {
-
         return "🟡";
-
     }
 
 
     if (
         bandeira === "VERMELHA"
     ) {
-
         return "🔴";
-
     }
 
 
@@ -1305,7 +1272,7 @@ function obterEmojiBandeira(
 
 
 // ========================================
-// REGISTRAR MUDANÇA DA ESTAÇÃO
+// HISTÓRICO ESTAÇÃO
 // ========================================
 
 function registrarMudancaEstacao(
@@ -1313,15 +1280,13 @@ function registrarMudancaEstacao(
     noturno
 ) {
 
-
-    // Primeira leitura
-
     if (
         ultimoBandeira === null
     ) {
 
         ultimoBandeira =
             bandeira;
+
 
         ultimoNoturno =
             noturno;
@@ -1349,21 +1314,15 @@ function registrarMudancaEstacao(
 
         mostrarHistoricoEstacao();
 
-
         return;
 
     }
 
 
-    // =================================
-    // MUDANÇA DE BANDEIRA
-    // =================================
-
     if (
         bandeira !==
         ultimoBandeira
     ) {
-
 
         historicoBandeiras.push({
 
@@ -1394,15 +1353,10 @@ function registrarMudancaEstacao(
     }
 
 
-    // =================================
-    // MUDANÇA DO NOTURNO
-    // =================================
-
     if (
         noturno !==
         ultimoNoturno
     ) {
-
 
         historicoBandeiras.push({
 
@@ -1433,11 +1387,10 @@ function registrarMudancaEstacao(
 
 
 // ========================================
-// MOSTRAR HISTÓRICO DA ESTAÇÃO
+// MOSTRAR HISTÓRICO ESTAÇÃO
 // ========================================
 
 function mostrarHistoricoEstacao() {
-
 
     const elemento =
         document.getElementById(
@@ -1451,7 +1404,6 @@ function mostrarHistoricoEstacao() {
     historicoBandeiras.forEach(
         registro => {
 
-
             const linha =
                 document.createElement(
                     "div"
@@ -1462,10 +1414,6 @@ function mostrarHistoricoEstacao() {
                 "registro"
             );
 
-
-            // ==============================
-            // BANDEIRA INICIAL
-            // ==============================
 
             if (
                 registro.tipo ===
@@ -1481,11 +1429,6 @@ function mostrarHistoricoEstacao() {
                     `(estado inicial)`;
 
             }
-
-
-            // ==============================
-            // MUDANÇA DE BANDEIRA
-            // ==============================
 
             else if (
                 registro.tipo ===
@@ -1506,19 +1449,16 @@ function mostrarHistoricoEstacao() {
 
             }
 
-
-            // ==============================
-            // MUDANÇA NOTURNA
-            // ==============================
-
             else {
 
                 linha.innerText =
                     `${registro.horario} → 🌙 ` +
                     `Desconto noturno ` +
-                    `${registro.ativo
-                        ? "ATIVADO"
-                        : "DESATIVADO"}`;
+                    `${
+                        registro.ativo
+                            ? "ATIVADO"
+                            : "DESATIVADO"
+                    }`;
 
             }
 
@@ -1539,7 +1479,6 @@ function mostrarHistoricoEstacao() {
 
 function iniciarSessao() {
 
-
     sessaoAtiva =
         true;
 
@@ -1552,12 +1491,8 @@ function iniciarSessao() {
         [];
 
 
-    energiaSessao =
-        0;
-
-
-    valorSessao =
-        0;
+    percentualInicial =
+        bateria;
 
 
     ultimoPercentualRegistrado =
@@ -1570,10 +1505,6 @@ function iniciarSessao() {
 
     ultimoNoturno =
         null;
-
-
-    percentualInicial =
-        bateria;
 
 
     inicioSessao =
@@ -1598,9 +1529,6 @@ function iniciarSessao() {
     registrarMudanca();
 
 
-    // Busca imediatamente
-    // o estado atual da estação
-
     buscarEstacao();
 
 }
@@ -1612,7 +1540,6 @@ function iniciarSessao() {
 
 function finalizarSessao() {
 
-
     sessaoAtiva =
         false;
 
@@ -1623,39 +1550,28 @@ function finalizarSessao() {
         "Iniciar nova sessão";
 
 
+    if (
+        inicioSessao
+    ) {
+
+        const duracao =
+            new Date().getTime() -
+            inicioSessao.getTime();
+
+
+        document
+            .getElementById("duracao")
+            .innerText =
+            formatarDuracao(
+                duracao
+            );
+
+    }
+
+
     calcularSessao();
 
-
 }
-
-
-// ========================================
-// BOTÃO
-// ========================================
-
-document
-    .getElementById("botao")
-    .addEventListener(
-        "click",
-        function() {
-
-
-            if (
-                sessaoAtiva
-            ) {
-
-                finalizarSessao();
-
-            }
-
-            else {
-
-                iniciarSessao();
-
-            }
-
-        }
-    );
 
 
 // ========================================
@@ -1663,7 +1579,6 @@ document
 // ========================================
 
 function calcularSessao() {
-
 
     if (
         percentualInicial === null ||
@@ -1682,6 +1597,15 @@ function calcularSessao() {
     const diferenca =
         percentualFinal -
         percentualInicial;
+
+
+    document
+        .getElementById("variacao")
+        .innerText =
+        `${percentualInicial}% → ` +
+        `${percentualFinal}% ` +
+        `(${diferenca >= 0 ? "+" : ""}` +
+        `${diferenca}%)`;
 
 
     if (
@@ -1709,14 +1633,6 @@ function calcularSessao() {
     }
 
 
-    // =================================
-    // ENERGIA ESTIMADA DO CELULAR
-    // =================================
-
-    const CAPACIDADE_CELULAR =
-        0.0194;
-
-
     energiaSessao =
         CAPACIDADE_CELULAR *
         (
@@ -1724,23 +1640,176 @@ function calcularSessao() {
         );
 
 
-    // =================================
-    // CUSTO
-    // =================================
-
-    // Para o protótipo utilizamos
-    // a tarifa vigente no final da sessão.
-
-    const tarifa =
-        calcularTarifa(
-            ultimoBandeira,
-            ultimoNoturno
-        );
+    calcularCustoPorTrechos();
 
 
-    valorSessao =
-        energiaSessao *
-        tarifa;
+    calcularVeiculos(
+        diferenca
+    );
+
+}
+
+
+// ========================================
+// CUSTO POR TRECHOS
+// ========================================
+
+function calcularCustoPorTrechos() {
+
+    let custoTotal =
+        0;
+
+
+    let resumo =
+        "";
+
+
+    // ====================================
+    // CADA PORCENTAGEM REPRESENTA
+    // UMA PARTE DA CARGA
+    // ====================================
+
+    const registros =
+        historico;
+
+
+    for (
+        let i = 1;
+        i < registros.length;
+        i++
+    ) {
+
+        const anterior =
+            registros[i - 1];
+
+
+        const atual =
+            registros[i];
+
+
+        const diferenca =
+            atual.bateria -
+            anterior.bateria;
+
+
+        if (
+            diferenca <= 0
+        ) {
+
+            continue;
+
+        }
+
+
+        const energia =
+            CAPACIDADE_CELULAR *
+            (
+                diferenca / 100
+            );
+
+
+        // Como a mudança de bandeira
+        // é registrada no histórico,
+        // procuramos a condição vigente
+        // naquele momento.
+
+        let bandeira =
+            ultimoBandeira ||
+            "VERDE";
+
+
+        let noturno =
+            ultimoNoturno ||
+            false;
+
+
+        // Para o protótipo,
+        // utilizamos o histórico da estação
+        // para identificar a condição mais
+        // próxima do registro.
+
+        if (
+            historicoBandeiras.length > 0
+        ) {
+
+            const registroEstacao =
+                historicoBandeiras[
+                    historicoBandeiras.length - 1
+                ];
+
+
+            if (
+                registroEstacao.tipo ===
+                "bandeira"
+            ) {
+
+                bandeira =
+                    registroEstacao.nova;
+
+            }
+
+
+            if (
+                registroEstacao.tipo ===
+                "noturno"
+            ) {
+
+                noturno =
+                    registroEstacao.ativo;
+
+            }
+
+        }
+
+
+        const tarifa =
+            calcularTarifa(
+                bandeira,
+                noturno
+            );
+
+
+        const custo =
+            energia *
+            tarifa;
+
+
+        custoTotal +=
+            custo;
+
+
+        resumo +=
+
+            `<p>
+                ${anterior.bateria}% →
+                ${atual.bateria}%
+                <br>
+                ${obterEmojiBandeira(
+                    bandeira
+                )}
+                ${bandeira}
+                ${noturno
+                    ? " 🌙"
+                    : ""}
+                <br>
+                ${energia
+                    .toFixed(4)
+                    .replace(".", ",")}
+                kWh ×
+                R$
+                ${tarifa
+                    .toFixed(2)
+                    .replace(".", ",")}
+                =
+                <strong>
+                    R$
+                    ${custo
+                        .toFixed(4)
+                        .replace(".", ",")}
+                </strong>
+            </p>`;
+
+    }
 
 
     document
@@ -1759,26 +1828,29 @@ function calcularSessao() {
             "valorSessao"
         )
         .innerText =
-        valorSessao
+        custoTotal
             .toFixed(2)
             .replace(".", ",");
 
 
-    calcularVeiculos(
-        diferenca
-    );
+    document
+        .getElementById(
+            "resumoFinanceiro"
+        )
+        .innerHTML =
+        resumo ||
+        "<p>Nenhum trecho calculado.</p>";
 
 }
 
 
 // ========================================
-// SIMULAÇÃO DE VEÍCULOS
+// VEÍCULOS
 // ========================================
 
 function calcularVeiculos(
     percentual
 ) {
-
 
     const veiculos = [
 
@@ -1788,8 +1860,8 @@ function calcularVeiculos(
 
             capacidade:
                 38
-        },
 
+        },
 
         {
             nome:
@@ -1797,8 +1869,8 @@ function calcularVeiculos(
 
             capacidade:
                 60
-        },
 
+        },
 
         {
             nome:
@@ -1806,6 +1878,7 @@ function calcularVeiculos(
 
             capacidade:
                 100
+
         }
 
     ];
@@ -1831,10 +1904,22 @@ function calcularVeiculos(
                 );
 
 
+            const bandeira =
+                dadosEstacao
+                    ? dadosEstacao.bandeira
+                    : "VERDE";
+
+
+            const noturno =
+                dadosEstacao
+                    ? dadosEstacao.noturno
+                    : false;
+
+
             const tarifa =
                 calcularTarifa(
-                    ultimoBandeira,
-                    ultimoNoturno
+                    bandeira,
+                    noturno
                 );
 
 
@@ -1859,21 +1944,31 @@ function calcularVeiculos(
                 `<strong>
                     ${veiculo.nome}
                 </strong>
+
                 <br>
+
                 Capacidade:
                 ${veiculo.capacidade} kWh
+
                 <br>
+
                 Carga equivalente:
-                ${energia.toFixed(2)} kWh
+                ${energia
+                    .toFixed(2)}
+                kWh
+
                 <br>
+
                 <span class="valor">
+
                     R$
                     ${valor
                         .toFixed(2)
                         .replace(".", ",")}
+
                 </span>`;
 
-            
+
             elemento.appendChild(
                 div
             );
@@ -1885,10 +1980,8 @@ function calcularVeiculos(
 
 
 // ========================================
-// ATUALIZAÇÃO AUTOMÁTICA DA ESTAÇÃO
+// ATUALIZAÇÃO DA ESTAÇÃO
 // ========================================
-
-// Consulta o ESP32 a cada 5 segundos
 
 setInterval(
     buscarEstacao,
